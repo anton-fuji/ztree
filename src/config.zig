@@ -33,9 +33,9 @@ pub fn parseArgs(args: []const []const u8) ParseResult {
             config.no_color = true;
         } else if (std.mem.eql(u8, arg, "-L")) {
             i += 1;
-            if (i >= args.len) return .{ .err = "-L には数値が必要です" };
+            if (i >= args.len) return .{ .err = " -L requires a numeric value " };
             config.max_depth = std.fmt.parseInt(u32, args[i], 10) catch {
-                return .{ .err = "-L の値が不正です（整数を指定してください）" };
+                return .{ .err = "The value of -L is invalid (please specify an integer)" };
             };
         } else if (std.mem.eql(u8, arg, "-h") or std.mem.eql(u8, arg, "--help")) {
             return .help;

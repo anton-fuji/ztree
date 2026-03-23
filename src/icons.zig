@@ -1,18 +1,16 @@
 const std = @import("std");
 
-/// Nerd Fonts v3 のアイコン定義
 /// コードポイントは nerdfont Python パッケージで検証済み
 pub const Icon = struct {
     glyph: []const u8,
     color: ?[]const u8,
 };
 
-// ─── 基本アイコン ─────────────────────────────────────────
 pub const icon_dir:     Icon = .{ .glyph = "\u{f07b} ", .color = "\x1b[1;34m" }; // nf-fa-folder
 pub const icon_dir_open:Icon = .{ .glyph = "\u{f07c} ", .color = "\x1b[1;34m" }; // nf-fa-folder_open
 pub const icon_default: Icon = .{ .glyph = "\u{f15b} ", .color = null };           // nf-fa-file
 
-// ─── 拡張子テーブル ───────────────────────────────────────
+// ─── File extension table ───────────────────────────────────────
 const ExtEntry = struct { ext: []const u8, icon: Icon };
 
 const ext_table = [_]ExtEntry{
@@ -157,7 +155,6 @@ const ext_table = [_]ExtEntry{
     .{ .ext = "vim",  .icon = .{ .glyph = "\u{e62b} ", .color = "\x1b[32m" } }, // nf-custom-vim
 };
 
-// ─── 特殊ファイル名テーブル ───────────────────────────────
 const SpecialEntry = struct { name: []const u8, icon: Icon };
 
 const special_table = [_]SpecialEntry{
@@ -187,15 +184,12 @@ const special_table = [_]SpecialEntry{
     .{ .name = ".nvimrc",        .icon = .{ .glyph = "\u{e62b} ", .color = "\x1b[32m" } },
 };
 
-// ─── 公開 API ─────────────────────────────────────────────
-
+// ─── Public API ─────────────────────────────────────────────
 pub fn getIcon(filename: []const u8) Icon {
-    // 特殊ファイル名（完全一致）
     for (special_table) |s| {
         if (std.mem.eql(u8, s.name, filename)) return s.icon;
     }
 
-    // 拡張子マッチ
     const ext = getExtension(filename) orelse return icon_default;
     for (ext_table) |entry| {
         if (std.ascii.eqlIgnoreCase(entry.ext, ext)) return entry.icon;
@@ -210,7 +204,7 @@ fn getExtension(filename: []const u8) ?[]const u8 {
     while (i > 0) {
         i -= 1;
         if (filename[i] == '.') {
-            if (i == 0) return null; // 隠しファイル (.bashrc 等)
+            if (i == 0) return null;
             return filename[i + 1 ..];
         }
     }
