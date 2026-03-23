@@ -5,7 +5,7 @@ Supports colorful output and Nerd Fonts icons.
 
 ---
 
-## ✨ Features
+## Features
 
 - 📁 Recursive directory tree visualization
 - 🎨 ANSI color support (optional)
@@ -14,23 +14,7 @@ Supports colorful output and Nerd Fonts icons.
 - 🧩 Simple and modular design
 
 ---
-
-## 📦 Project Structure
-
-```
-src/
-├── main.zig      Entry point and help output
-├── config.zig    CLI config and argument parsing
-├── tree.zig      Directory traversal and rendering
-├── icons.zig     Nerd Fonts icon mappings
-└── color.zig     ANSI color helpers
-build.zig         Build configuration
-```
-
----
-
-## 🚀 Getting Started
-
+## Getting Started
 ### Requirements
 
 - Zig `0.13.0` or later  
@@ -50,7 +34,7 @@ The binary will be generated at:
 
 ---
 
-## 🛠 Usage
+## Usage
 
 ```bash
 ztree                      # Show current directory
@@ -65,7 +49,7 @@ ztree -a -L 3 ~/projects   # Combined example
 
 ---
 
-## 📸 Example Output
+## Example Output
 
 ```
 .
@@ -82,7 +66,7 @@ ztree -a -L 3 ~/projects   # Combined example
 
 ---
 
-## 🎨 Icons
+## Icons
 
 Icon support requires a Nerd Fonts-compatible font:
 
@@ -105,7 +89,7 @@ Supported file types include:
 
 ---
 
-## 🧠 Internals
+## Internals
 
 ### `config.zig`
 
@@ -151,7 +135,7 @@ ANSI color utilities.
 
 ---
 
-## 🧪 Roadmap
+## Roadmap
 
 - [ ] `-p` : Show full path
 - [ ] `-s` : Show file size
@@ -161,6 +145,6 @@ ANSI color utilities.
 
 ---
 
-## 📄 License
+## 📄 LICENSE
 
 [MIT License]()
