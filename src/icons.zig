@@ -1,6 +1,5 @@
 const std = @import("std");
 
-/// コードポイントは nerdfont Python パッケージで検証済み
 pub const Icon = struct {
     glyph: []const u8,
     color: ?[]const u8,

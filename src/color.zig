@@ -1,6 +1,3 @@
-/// ANSI カラーエスケープコードのヘルパー
-/// no_color モード時はすべて空文字を返す
-
 pub const reset = "\x1b[0m";
 pub const bold  = "\x1b[1m";
 
