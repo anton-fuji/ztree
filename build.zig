@@ -15,7 +15,6 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
-    // `zig build run -- [args]` で直接実行
     const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| run_cmd.addArgs(args);
