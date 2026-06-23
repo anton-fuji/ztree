@@ -35,7 +35,7 @@ pub fn main(init: std.process.Init) !void {
         .config => |cfg| {
             var counter = tree.Counter{};
             try tree.printRoot(stdout, &cfg);
-            try tree.printTree(allocator, stdout, cfg.target_path, "", 0, &cfg, &counter);
+            try tree.printTree(allocator, io, stdout, cfg.target_path, "", 0, &cfg, &counter);
             try tree.printSummary(stdout, &counter, &cfg);
         },
     }
