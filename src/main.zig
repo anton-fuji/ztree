@@ -2,23 +2,22 @@ const std = @import("std");
 const config_mod = @import("config.zig");
 const tree = @import("tree.zig");
 
-pub fn main() !void {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
+pub fn main(init: std.process.Init) !void {
+    const allocator = init.gpa;
+    const io = init.io;
 
     var stdout_buf: [65536]u8 = undefined;
-    var stdout_writer = std.fs.File.stdout().writer(&stdout_buf);
+    var stdout_writer = std.Io.File.stdout().writer(io, &stdout_buf);
     const stdout = &stdout_writer.interface;
     defer stdout.flush() catch {};
 
     var stderr_buf: [1024]u8 = undefined;
-    var stderr_writer = std.fs.File.stderr().writer(&stderr_buf);
+    var stderr_writer = std.Io.File.stderr().writer(io, &stderr_buf);
     const stderr = &stderr_writer.interface;
     defer stderr.flush() catch {};
 
-    const args = try std.process.argsAlloc(allocator);
-    defer std.process.argsFree(allocator, args);
+    // argsFree は不要。init.arena は終了時に自動で解放される
+    const args = try init.minimal.args.toSlice(init.arena.allocator());
 
     const result = config_mod.parseArgs(args);
     switch (result) {
